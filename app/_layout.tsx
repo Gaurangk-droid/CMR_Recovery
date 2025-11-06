@@ -1,24 +1,14 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Redirect, Stack } from "expo-router";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
+  // Redirect root ("/") to "/welcome"
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+    <>
+      <Redirect href="/welcome" />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="welcome" />
+        <Stack.Screen name="(tabs)" />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </>
   );
 }
